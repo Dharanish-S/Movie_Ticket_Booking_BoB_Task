@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Tickets</title>
+    <!-- Add Bootstrap CSS link -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Colorful Gradient Background */
+        body {
+            background: linear-gradient(135deg, #ff5f6d 0%, #ffc371 100%);
+            background-size: cover;
+            background-attachment: fixed;
+            color: #333;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Custom CSS for the page */
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+        /* Date and Time Selection */
+        .date-time-selection {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .date-selection,
+        .time-selection {
+            flex: 1;
+            margin: 0 10px;
+        }
+
+        .date-selection label,
+        .time-selection label {
+            font-weight: bold;
+        }
+
+        /* Seat Selection */
+        .seat-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .seat {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: #ccc;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .selected {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .book-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 10px 20px;
+            margin-top: 20px;
+        }
+
+        .book-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Select Your Seats</h2>
+
+        <!-- Date and Time Selection -->
+        <div class="date-time-selection">
+            <div class="date-selection">
+                <label for="show-date">Select Date:</label>
+                <select class="form-control" id="show-date">
+                    <option value="2023-09-05">2023-09-05</option>
+                    <option value="2023-09-06">2023-09-06</option>
+                    <option value="2023-09-07">2023-09-07</option>
+                    <option value="2023-09-08">2023-09-08</option>
+                    <option value="2023-09-09">2023-09-09</option>
+                </select>
+            </div>
+            <div class="time-selection">
+                <label for="show-time">Select Show Time:</label>
+                <select class="form-control" id="show-time">
+                    <option value="09:00 AM">09:00 AM</option>
+                    <option value="12:00 PM">12:00 PM</option>
+                    <option value="03:00 PM">03:00 PM</option>
+                    <option value="06:00 PM">06:00 PM</option>
+                    <option value="09:00 PM">09:00 PM</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Number of Seats Input -->
+        <div class="form-group">
+            <label for="numSeats">Number of Seats to Book:</label>
+            <select class="form-control" id="numSeats">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+        </div>
+
+        <!-- Bootstrap-styled "Show Seats" Button -->
+        <button class="btn btn-primary show-seats-button">Show Seats</button>
+
+        <div id="seat-map" style="display: none;">
+            <!-- Seat selection grid will be generated here -->
+        </div>
+
+        <!-- Bootstrap-styled "Book Tickets" Button -->
+        <button class="btn btn-primary book-button" style="display: none;">Book Tickets</button>
+    </div>
+
+    <!-- Add Bootstrap JS and jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            let numSeatsToBook = 0;
+            let selectedTimeSlot = "";
+
+            // Function to update the number of seats to book
+            function updateNumSeatsToBook() {
+                numSeatsToBook = parseInt($("#numSeats").val());
+            }
+
+            // Function to check if the user has selected the allowed number of seats
+            function canSelectMoreSeats() {
+                const selectedSeats = $(".seat.selected").length;
+                return selectedSeats < numSeatsToBook;
+            }
+
+            // Handle "Show Seats" button click
+            $(".show-seats-button").on("click", function() {
+                updateNumSeatsToBook();
+                generateSeatMap();
+            });
+
+            // Handle time slot selection
+            $(".time-slot").on("click", function() {
+                $(".time-slot").removeClass("selected");
+                $(this).addClass("selected");
+                selectedTimeSlot = $(this).text();
+            });
+
+            // Create a sample seat selection grid
+            function generateSeatMap() {
+                const seatMap = document.getElementById("seat-map");
+                seatMap.innerHTML = ""; // Clear previous seat map
+
+                const rows = 5;
+                const seatsPerRow = 8;
+
+                for (let i = 0; i < rows; i++) {
+                    const row = document.createElement("div");
+                    row.className = "row seat-container"; // Added seat-container class
+                    for (let j = 0; j < seatsPerRow; j++) {
+                        const seat = document.createElement("div");
+                        seat.className = "seat";
+                        seat.textContent = String.fromCharCode(65 + i) + (j + 1);
+                        row.appendChild(seat);
+                    }
+                    seatMap.appendChild(row);
+                }
+
+                // Add click event for seat selection
+                seatMap.addEventListener("click", function(event) {
+                    const selectedSeats = $(".seat.selected").length;
+                    if (event.target.classList.contains("seat")) {
+                        if (canSelectMoreSeats() || $(event.target).hasClass("selected")) {
+                            $(event.target).toggleClass("selected");
+                        }
+                    }
+                });
+
+                // Display the seat grid
+                $("#seat-map").show();
+                // Show the "Book Tickets" button
+                $(".book-button").show();
+                // Hide the "Show Seats" button
+                $(".show-seats-button").hide();
+            }
+
+            // Handle the "Book Tickets" button click
+            $(".book-button").on("click", function() {
+                if (canSelectMoreSeats()) {
+                    alert("Please select " + numSeatsToBook + " seats before booking.");
+                } else if (!selectedTimeSlot) {
+                    alert("Please select a show time slot.");
+                } else {
+                    const selectedSeats = $(".seat.selected").toArray().map(seat => seat.textContent);
+                    alert("Booking successful!\nDate: " + $("#show-date").val() + "\nTime: " + selectedTimeSlot + "\nSelected Seats: " + selectedSeats.join(", "));
+                }
+            });
+        });
+    </script>
+</body>
+</html>

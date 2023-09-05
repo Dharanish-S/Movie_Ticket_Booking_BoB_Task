@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Ticket Booking</title>
+    <!-- Add Bootstrap CSS link -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Colorful Gradient Background */
+        body {
+            background: linear-gradient(135deg, #ff5f6d 0%, #ffc371 100%);
+            background-size: cover;
+            background-attachment: fixed;
+            color: #333;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Custom CSS for the page */
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1, h2, p {
+            color: #333;
+        }
+
+        /* Login and Logout Form Styling */
+        .login-form {
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+        }
+
+        .login-form input[type="email"],
+        .login-form input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .login-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .login-form button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Logout Button Styling */
+        .logout-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .logout-button button {
+            background-color: #dc3545;
+        }
+
+        .logout-button button:hover {
+            background-color: #c82333;
+        }
+
+        /* Movie Card Styling */
+        .movie-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            margin: 20px;
+        }
+
+        .movie-card img {
+            max-width: 100%;
+        }
+
+        .book-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .book-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logout Button -->
+        <div class="logout-button">
+            <button class="btn btn-danger">Logout</button>
+        </div>
+
+        <h1>Welcome to Movie Ticket Booking</h1>
+        <p>Book your favorite movie tickets now!</p>
+
+        <!-- Movie Cards Section -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="movie-card">
+                    <img src="movie1.jpg" alt="Movie 1">
+                    <h3>JAILER</h3>
+                    <p>Malayalam, Tamil, Kannada</p>
+                    <button class="book-button">Book Tickets</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="movie-card">
+                    <img src="movie2.jpg" alt="Movie 2">
+                    <h3>AVATAR</h3>
+                    <p>English, Hindi</p>
+                    <button class="book-button">Book Tickets</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="movie-card">
+                    <img src="movie3.jpg" alt="Movie 3">
+                    <h3>KUSHI</h3>
+                    <p>Telugu ,Tamil, Kannada</p>
+                    <button class="book-button">Book Tickets</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add more movie cards as needed -->
+
+    </div>
+
+    <!-- Add Bootstrap JS and jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Confirmation</title>
+    <style>
+        /* Center the container */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #ff5f6d 0%, #ffc371 100%);
+        }
+
+        /* Ticket CSS Styles */
+        .ticket {
+            background-color: #fff;
+            width: 80%;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .movie-name {
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .seat-number {
+            font-size: 18px;
+        }
+
+        .date-time {
+            font-size: 16px;
+        }
+
+        .paid-symbol {
+            color: #007bff;
+            font-size: 24px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="ticket">
+        <div class="movie-name">Movie Name: [Movie Title]</div>
+        <div class="seat-number">Seat Number: [Seat Number]</div>
+        <div class="date-time">Date & Time: [Date and Time]</div>
+        <div class="paid-symbol">&#10004; Paid</div>
+    </div>
+</body>
+</html>
